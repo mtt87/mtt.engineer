@@ -1,0 +1,113 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.2.1/schema.json",
+  "basics": {
+    "name": "Mattia Asti",
+    "email": "mattia.asti@gmail.com",
+    "image": "https://avatars.githubusercontent.com/u/2150927",
+    "location": {
+      "countryCode": "UK",
+      "city": "London"
+    },
+    "label": "Software Engineer",
+    "summary": "I consider myself mostly a product engineer. I've been building various products and tools over the years both while working at different companies and in my spare time, and that's what I enjoy the most. I work best with Javascript/Typescript using React, React Native, Node.js, GraphQL, and CSS-in-JS.",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "url": "https://github.com/mtt87",
+        "username": "mtt87"
+      }
+    ]
+  },
+  "education": [
+    {
+      "startDate": "2006",
+      "endDate": "2011",
+      "score": "drop-out",
+      "institution": "Politecnico di Milano",
+      "studyType": "Industrial and Management Engineering"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Italian",
+      "fluency": "Mother tongue"
+    },
+    {
+      "language": "English",
+      "fluency": "Full Professional"
+    }
+  ],
+  "meta": {
+    "lastModified": "2025-01-26"
+  },
+  "work": [
+    {
+      "name": "Apple",
+      "startDate": "2022-05",
+      "position": "Software Engineer",
+      "location": "London, UK",
+      "summary": "I'm part of ASE (Apple Services Engineering) and my team is building and maintaining internal localisation tools. "
+    },
+    {
+      "name": "tru.ID (IDlayr)",
+      "startDate": "2021-01",
+      "endDate": "2022-05",
+      "url": "https://idlayr.com",
+      "location": "London, UK",
+      "position": "Technical Lead",
+      "summary": "tru.ID is an early-stage startup transforming authentication with SIM security. I was the owner of the frontend for the user-facing products which I've contributed both to the API and technical design. We used React with Next.js and took advantage of the Vercel serverless platform",
+      "highlights": [
+        "Built the Developer Portal which included docs and the console dashboard.",
+        "Extensive work on the authentication layer including OIDC integrations and e2e tests with Playwright.",
+        "Helped build the design system and built the React components library with a focus on a11y.",
+        "Contributed to SDKs and a mobile app using React Native to demonstrate the capabilities of our platform",
+        "Currently exploring ways of improving loading time and user experience by leveraging edge computing."
+      ]
+    },
+    {
+      "name": "11:FS",
+      "startDate": "2019-10",
+      "endDate": "2020-09",
+      "url": "https://www.11fs.com",
+      "location": "London, UK",
+      "position": "Senior Software Engineer",
+      "summary": "11:FS is a leading Fintech consultancy. I worked on Foundry, their modular, ledger-first set of components that lets you build digitally native propositions to scale at speed. I worked mainly on the frontend which included a web admin portal, a mobile app, and internal tools.",
+      "highlights": [
+        "Lead the GraphQL API design.",
+        "Lead the authentication layer using Auth0, including the architecture of a mobile passwordless login.",
+        "Built the components library for our design system using CSS-in-JS.",
+        "Built various PoC to demonstrate different integration capabilities.",
+        "I was one of the engineers responsible to run demos to our existing and potential clients, including top-tier banks."
+      ]
+    },
+    {
+      "name": "TES Global",
+      "startDate": "2017-10",
+      "endDate": "2019-08",
+      "url": "https://www.tes.com",
+      "location": "London, UK",
+      "position": "Senior Software Engineer",
+      "summary": "At the time TES was one of the largest professional networks in the world with 8M+ teachers. The stack was based on 150+ node microservices and React on the frontend",
+      "highlights": [
+        "Payment gateway: significant refactoring, allowing a reduction in bugs producing duplicated/missing transactions and lost revenue in the busiest part of the website, the resources marketplace (~500k views per day)",
+        "Resources creator tool: introduced a secure and simple markdown editor migrating existing 3M resources pages.",
+        "Mobile apps: I introduced GraphQL allowing a significant optimisation of the network usage and caching."
+      ]
+    },
+    {
+      "name": "Hextech",
+      "startDate": "2017-01",
+      "endDate": "2021-01",
+      "position": "Co-founder",
+      "summary": "It started as a side project with friends working in our spare time during evenings but over the years we built 2 mobile apps, e-commerce, and tried to launch a new startup to help kids learn about financial education. Learned a lot from our failures."
+    },
+    {
+      "name": "TechHub",
+      "startDate": "2013-10",
+      "endDate": "2017-10",
+      "location": "London, UK",
+      "position": "Lead Developer",
+      "summary": "During my time working with TechHub we launched 5 international locations. I've integrated with different payment gateways and dealt with localisation. Also built the internal CRM, website, and a mobile app for the members."
+    }
+  ]
+}
