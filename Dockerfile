@@ -3,9 +3,11 @@ FROM oven/bun:latest AS web_build
 WORKDIR /usr/src/website
 COPY website/package.json .
 COPY website/bun.lock .
-COPY website .
 
 RUN bun install
+
+COPY website .
+
 RUN bun run build
 # final build inside /usr/src/website/dist
 
