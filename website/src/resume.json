@@ -9,7 +9,7 @@
       "city": "London"
     },
     "label": "Software Engineer",
-    "summary": "I consider myself mostly a product engineer. I've been building various products and tools over the years both while working at different companies and in my spare time, and that's what I enjoy the most. I work best with Javascript/Typescript using React, React Native, Node.js, GraphQL, and CSS-in-JS.",
+    "summary": "I'm a self-thought software engineer with 13+ years of experience. I've been building various products and tools over the years while working at different companies and also in my spare time. I work best with Javascript/Typescript across the full stack while specialising in the frontend where I've been using React for years. I consider myself a beginner with Rust. In my spare time you can find me playing with Raspberry Pis, home automation and LoRa mesh networks.",
     "profiles": [
       {
         "network": "GitHub",
@@ -38,7 +38,7 @@
     }
   ],
   "meta": {
-    "lastModified": "2025-01-26"
+    "lastModified": "2025-01-29"
   },
   "work": [
     {
@@ -46,7 +46,7 @@
       "startDate": "2022-05",
       "position": "Software Engineer",
       "location": "London, UK",
-      "summary": "I'm part of ASE (Apple Services Engineering) and my team is building and maintaining internal localisation tools. "
+      "summary": "I'm part of Apple Services Engineering. My team is building and maintaining internal tools that help localize our apps and services. I've done extensive work to improve our monorepo of multiple web apps and shared components with state of the art tooling, greatly increasing speed, cost savings and DX across a distributed team."
     },
     {
       "name": "tru.ID (IDlayr)",
@@ -57,11 +57,10 @@
       "position": "Technical Lead",
       "summary": "tru.ID is an early-stage startup transforming authentication with SIM security. I was the owner of the frontend for the user-facing products which I've contributed both to the API and technical design. We used React with Next.js and took advantage of the Vercel serverless platform",
       "highlights": [
-        "Built the Developer Portal which included docs and the console dashboard.",
+        "Built the Developer Portal which included: public docs, code samples and a console dashboard.",
         "Extensive work on the authentication layer including OIDC integrations and e2e tests with Playwright.",
-        "Helped build the design system and built the React components library with a focus on a11y.",
-        "Contributed to SDKs and a mobile app using React Native to demonstrate the capabilities of our platform",
-        "Currently exploring ways of improving loading time and user experience by leveraging edge computing."
+        "Helped build the design system and a React components library, with a focus on a11y.",
+        "Contributed to SDKs and a mobile app using React Native to demonstrate the capabilities of our platform."
       ]
     },
     {
@@ -73,8 +72,7 @@
       "position": "Senior Software Engineer",
       "summary": "11:FS is a leading Fintech consultancy. I worked on Foundry, their modular, ledger-first set of components that lets you build digitally native propositions to scale at speed. I worked mainly on the frontend which included a web admin portal, a mobile app, and internal tools.",
       "highlights": [
-        "Lead the GraphQL API design.",
-        "Lead the authentication layer using Auth0, including the architecture of a mobile passwordless login.",
+        "Lead the GraphQL API design and authentication layer with Auth0, including the architecture of a mobile passwordless login.",
         "Built the components library for our design system using CSS-in-JS.",
         "Built various PoC to demonstrate different integration capabilities.",
         "I was one of the engineers responsible to run demos to our existing and potential clients, including top-tier banks."
@@ -87,11 +85,10 @@
       "url": "https://www.tes.com",
       "location": "London, UK",
       "position": "Senior Software Engineer",
-      "summary": "At the time TES was one of the largest professional networks in the world with 8M+ teachers. The stack was based on 150+ node microservices and React on the frontend",
+      "summary": "At the time TES was one of the largest professional networks in the world with 8M+ teachers. The stack was based on 150+ node microservices and React on the frontend.",
       "highlights": [
-        "Payment gateway: significant refactoring, allowing a reduction in bugs producing duplicated/missing transactions and lost revenue in the busiest part of the website, the resources marketplace (~500k views per day)",
-        "Resources creator tool: introduced a secure and simple markdown editor migrating existing 3M resources pages.",
-        "Mobile apps: I introduced GraphQL allowing a significant optimisation of the network usage and caching."
+        "Significant refactoring of a payment gateway, allowing a reduction in bugs producing duplicated/missing transactions and lost revenue in the busiest part of the website, the resources marketplace (~500k views per day)",
+        "Introduced GraphQL in our mobile app allowing a significant optimisation of the network usage and caching."
       ]
     },
     {
@@ -99,7 +96,7 @@
       "startDate": "2017-01",
       "endDate": "2021-01",
       "position": "Co-founder",
-      "summary": "It started as a side project with friends working in our spare time during evenings but over the years we built 2 mobile apps, e-commerce, and tried to launch a new startup to help kids learn about financial education. Learned a lot from our failures."
+      "summary": "It started as a side project with friends working in our spare time during evenings but over the years we built 2 mobile apps, an e-commerce, and tried to launch a new startup to help kids learn about financial education. Learned a lot from our failures."
     },
     {
       "name": "TechHub",
@@ -107,7 +104,27 @@
       "endDate": "2017-10",
       "location": "London, UK",
       "position": "Lead Developer",
-      "summary": "During my time working with TechHub we launched 5 international locations. I've integrated with different payment gateways and dealt with localisation. Also built the internal CRM, website, and a mobile app for the members."
+      "summary": "During my time TechHub was the leading co-working space in London. I've integrated our backend systems with different payment gateways and dealt with localisation after launching 5 international locations. I also built the internal CRM, website, and a mobile app for the members."
+    }
+  ],
+  "projects": [
+    {
+      "entity": "Vonage (Nexmo)",
+      "name": "Number Verify JS SDK",
+      "startDate": "2015",
+      "endDate": "2015"
+    },
+    {
+      "entity": "Winerist",
+      "name": "E-commerce frontend",
+      "startDate": "2014",
+      "endDate": "2014"
+    },
+    {
+      "entity": "PA Digitale",
+      "name": "Dashboard for town analytics",
+      "startDate": "2012",
+      "endDate": "2012"
     }
   ]
 }

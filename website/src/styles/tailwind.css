@@ -1,0 +1,39 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+
+h1 {
+  @apply text-5xl font-extrabold dark:text-white;
+}
+
+h2 {
+  @apply text-4xl font-bold dark:text-white;
+}
+
+h3 {
+  @apply text-3xl font-bold dark:text-white;
+}
+
+h4 {
+  @apply text-2xl font-bold dark:text-white;
+}
+
+p {
+  @apply text-gray-700 mb-3;
+}
+
+header a {
+  @apply hover:underline;
+}
+
+a:not(header a) {
+  @apply text-blue-600 dark:text-blue-500 hover:underline;
+}
+
+hr {
+  @apply h-px my-8 bg-gray-200 border-0 dark:bg-gray-700;
+}

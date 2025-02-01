@@ -5,7 +5,16 @@
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
+hr {
+  @apply h-px my-0 bg-gray-200 border-0 dark:bg-gray-700;
+}
 
-h1 {
-  @apply text-3xl pb-2;
+html {
+  font-size: 14px;
+}
+
+@media print {
+  html {
+    font-size: 12px;
+  }
 }
