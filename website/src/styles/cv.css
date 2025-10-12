@@ -6,7 +6,7 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 hr {
-  @apply h-px my-0 bg-gray-200 border-0 dark:bg-gray-700;
+  @apply my-0 h-px border-0 bg-gray-200 dark:bg-gray-700;
 }
 
 html {

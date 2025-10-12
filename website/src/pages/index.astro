@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf()
+);
 ---
 
 <BaseLayout>
@@ -31,8 +36,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     cozy games on my PlayStation 5.
   </p>
   <p>
-    My CV is available in <a href="mattia_asti.pdf">PDF</a>, <a href="/cv"
-      >HTML</a
-    > or <a href="/cv.json">JSON</a>.
+    My CV is available in <a class="hover:underline" href="mattia_asti.pdf"
+      >PDF</a
+    >, <a class="hover:underline" href="/cv">HTML</a> or <a
+      class="hover:underline"
+      href="/cv.json">JSON</a
+    >.
   </p>
+
+  <hr />
+
+  <ul>
+    {
+      posts.map((post) => (
+        <li class="flex flex-col gap-1 no-underline">
+          <a href={`/posts/${post.id}`}>
+            <h4>{post.data.title}</h4>
+          </a>
+          <p>{post.data.description}</p>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
