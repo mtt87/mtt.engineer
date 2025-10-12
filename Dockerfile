@@ -8,7 +8,6 @@ RUN bun install
 
 COPY website .
 
-RUN bunx prettier -c .
 RUN bun run build
 # final build inside /usr/src/website/dist
 

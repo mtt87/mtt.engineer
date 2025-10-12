@@ -77,11 +77,11 @@ if [ "$LOCAL" != "$REMOTE" ]; then
   # pull latest changes
   git pull
   # rebuild docker image
-  sudo docker build -t mtt-engineer .
+  docker build -t mtt-engineer .
   # stop running container and start with the latest image
-  sudo docker stop mtt-engineer
-  sudo docker rm mtt-engineer
-  sudo docker run -d -p 3000:3000 \
+  docker stop mtt-engineer
+  docker rm mtt-engineer
+  docker run -d -p 3000:3000 \
     --restart unless-stopped \
     --name mtt-engineer mtt-engineer:latest
   # all good send a message
@@ -91,10 +91,10 @@ if [ "$LOCAL" != "$REMOTE" ]; then
 fi
 ```
 
-Last step is to create the cron every 5 minutes
+Last step is to create the cron every 5 minutes and make sure you add this to the root user cron with `sudo` or you will not be able to run the docker commands (which require sudo).
 
 ```sh
-crontab -e
+sudo crontab -e
 # add these lines at the end
 */5 * * * * /home/mattia/check-website-github.sh
 ```
