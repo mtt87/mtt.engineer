@@ -99,6 +99,12 @@ sudo crontab -e
 */5 * * * * /home/mattia/check-website-github.sh
 ```
 
+Additionally I found that I needed to run the following to make sure git accepts the fact that the owner of the repo directory is not the root user.
+
+```sh
+sudo git config --global --add safe.directory /home/mattia/mtt.engineer
+```
+
 If all goes well I get a nice confirmation with my Telegram bot.
 
 <img alt="telegram successful deployment message" src="/images/telegram_bot_success.png" />
