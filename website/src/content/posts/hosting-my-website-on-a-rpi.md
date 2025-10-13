@@ -120,8 +120,4 @@ If all goes well I get a nice confirmation with my Telegram bot.
 
 <img alt="telegram successful deployment message" src="/images/telegram_bot_success.png" />
 
-Future improvements:
-
-- make sure if the docker build fails that
-
 All the code is available on my GitHub https://github.com/mtt87/mtt.engineer
