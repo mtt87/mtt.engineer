@@ -60,7 +60,9 @@ For this reason I need to adopt a polling solution where I check every 5 minutes
 
 If they don't match we trigger the build of the new image and deployment.
 
-BONUS: I wanted to know once the operation is successful so I added a Telegram bot that sends me a message.
+Since the Cloudflare default cache TTL is 2 hours, I need to trigger a purge in order to immediately see the new changes.
+
+Once the operation is successful I sends me a message with a Telegram bot.
 
 ```bash
 #!/bin/bash
@@ -73,6 +75,8 @@ LOCAL=$(git rev-parse main)
 REMOTE=$(git rev-parse origin/main)
 TOKEN="" # telegram token
 CHAT_ID="" # telegram chat_id
+ZONE_ID="" # cloudflare zone_id
+CLOUDFLARE_TOKEN="" # cloudflare API token
 
 if [ "$LOCAL" != "$REMOTE" ]; then
   # pull latest changes
@@ -81,7 +85,6 @@ if [ "$LOCAL" != "$REMOTE" ]; then
   if ! docker build -t mtt-engineer .; then
     # if it fails reset to the original commit
     git reset --hard "$ORIGINAL_COMMIT"
-
     MESSAGE="❌ Failed to update website mtt.engineer"
     curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage \
       -d chat_id=$CHAT_ID \
@@ -99,6 +102,11 @@ if [ "$LOCAL" != "$REMOTE" ]; then
   curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage \
     -d chat_id=$CHAT_ID \
     -d text="$MESSAGE" > /dev/null
+  # purge cloudflare cache
+  curl https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache \
+    -H 'Content-Type: application/json' \
+    -H "Authorization: Bearer $CLOUDFLARE_TOKEN" \
+    -d '{"purge_everything": true}'
 fi
 ```
 
