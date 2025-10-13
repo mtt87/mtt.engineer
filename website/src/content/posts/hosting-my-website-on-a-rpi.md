@@ -73,7 +73,6 @@ LOCAL=$(git rev-parse main)
 REMOTE=$(git rev-parse origin/main)
 TOKEN="" # telegram token
 CHAT_ID="" # telegram chat_id
-MESSAGE="Website mtt.engineer updated!"
 
 if [ "$LOCAL" != "$REMOTE" ]; then
   # pull latest changes
@@ -82,6 +81,11 @@ if [ "$LOCAL" != "$REMOTE" ]; then
   if ! docker build -t mtt-engineer .; then
     # if it fails reset to the original commit
     git reset --hard "$ORIGINAL_COMMIT"
+
+    MESSAGE="❌ Failed to update website mtt.engineer"
+    curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage \
+      -d chat_id=$CHAT_ID \
+      -d text="$MESSAGE" > /dev/null
     exit 1
   fi
   # stop running container and start with the latest image
@@ -91,6 +95,7 @@ if [ "$LOCAL" != "$REMOTE" ]; then
     --restart unless-stopped \
     --name mtt-engineer mtt-engineer:latest
   # all good send a message
+  MESSAGE="✅ Website mtt.engineer updated!"
   curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage \
     -d chat_id=$CHAT_ID \
     -d text="$MESSAGE" > /dev/null
