@@ -1,5 +1,5 @@
 ---
-title: Hosting my website on a RPi 5 at home
+title: Hosting my website on an RPi 5 at home
 description: Astro static website hosted on a RPi5 using Cloudflare Tunnel.
 keywords:
   - raspberry pi
@@ -11,13 +11,13 @@ createdAt: 2025-12-12
 updatedAt: 2025-12-12
 ---
 
-## Hosting my website on a RPi 5 at home
+## Hosting my website on an RPi 5 at home
 
 <img alt="website hosting architecture" src="/images/website_hosting_rpi.png" />
 
 ### Why such a complex setup to host a simple website? 😅
 
-I know there are plenty of services that can host a static website for free but since I had a RPi 5 at home with spare capacity I decided to do this mostly **for fun** and to play around with some tools.
+I know there are plenty of services that can host a static website for free, but since I had an RPi 5 at home with spare capacity, I decided to do this mostly **for fun** and to play around with some tools.
 
 The website will be hosted on a RPi 5 at home where I have **no public static IP** and **no ports exposed** on the public internet.
 
@@ -27,7 +27,7 @@ I want to maintain a **good DX**: make edits on my MacBook, push them to GitHub 
 
 I bought the domain `mtt.engineer` on Cloudflare, which is also handling the nameservers and allows me to point the domain A record to a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/).
 
-This is how the DNS record should look like if it's correclty proxied to the tunnel.
+This is how the DNS record should look if it’s correctly proxied to the tunnel.
 
 <img alt="cloudflare dns with tunnel" src="/images/cloudflare_dns_tunnel.png" />
 
@@ -35,16 +35,16 @@ This is how the DNS record should look like if it's correclty proxied to the tun
 
 I have a [RaspberryPi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) with [M.2 HAT + 256GB SSD](https://www.raspberrypi.com/products/ssd-kit/) connected via ethernet to my home network and I bought an external multi USB-C power adaptor as I have other RPis powered at the same time.
 
-I'm using the standard Raspbian OS where I additionally installed `git`, `docker` and `cloudflared`.
+I'm using the standard Raspbian OS where I additionally installed `git`, `docker`, and `cloudflared`.
 
 ```sh
 sudo apt-get update
 sudo apt-get install git docker cloudflared
 ```
 
-To setup the tunnel with `cloudflared` I've used the local managed tunnel mode running `cloudflared tunnel create website` where `website` is the name of my tunnel, then follow the setup instructions.
+To set up the tunnel with `cloudflared`, I used the local managed tunnel mode by running `cloudflared tunnel create website`, where `website` is the name of my tunnel, and then followed the setup instructions.
 
-Once everything has been setup correctly you can verify that the tunnel is up and running on your Cloudflare dashboard.
+Once everything has been set up correctly, you can verify that the tunnel is up and running on your Cloudflare dashboard.
 
 <img alt="tunnel setup correctly" src="/images/tunnel_setup_correctly.png" />
 
@@ -52,9 +52,9 @@ Cloudflare is also configured to leverage `stale-while-revalidate` and serve cac
 
 ### Simplest CI/CD
 
-One of the requirements is to not expose the RPi to the public internet directly so I can't have webhooks from GitHub reach the RPi when I push new code.
+One of the requirements is to not expose the RPi to the public internet directly, so I can't have webhooks from GitHub reach the RPi when I push new code.
 
-I briefly explored the idea of using [Woodpecker CI](https://woodpecker-ci.org) but it defaults to requiring connectivity with GitHub and a `redirect_url` to perform oAuth authentication plus it seemed really overkill.
+I briefly explored the idea of using [Woodpecker CI](https://woodpecker-ci.org), but it defaults to requiring connectivity with GitHub and a `redirect_url` to perform OAuth authentication, plus it seemed really overkill.
 
 For this reason I need to adopt a polling solution where I check every 5 minutes if there are new updates by comparing the local `main` and remote `origin/main` SHA1.
 
@@ -91,7 +91,7 @@ if [ "$LOCAL" != "$REMOTE" ]; then
 fi
 ```
 
-Last step is to create the cron every 5 minutes and make sure you add this to the root user cron with `sudo` or you will not be able to run the docker commands (which require sudo).
+Finally, create a cron job that runs every 5 minutes. Since the Docker commands require `sudo`, you must add this job to the root user's crontab.
 
 ```sh
 sudo crontab -e

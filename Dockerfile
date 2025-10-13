@@ -8,6 +8,7 @@ RUN bun install
 
 COPY website .
 
+RUN bun run check-spell
 RUN bun run build
 # final build inside /usr/src/website/dist
 
