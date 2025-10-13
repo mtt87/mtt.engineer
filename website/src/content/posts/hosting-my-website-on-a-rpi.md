@@ -64,9 +64,11 @@ BONUS: I wanted to know once the operation is successful so I added a Telegram b
 
 ```bash
 #!/bin/bash
+
 cd /home/mattia/mtt.engineer
 git fetch origin main
 
+ORIGINAL_COMMIT=$(git rev-parse HEAD)
 LOCAL=$(git rev-parse main)
 REMOTE=$(git rev-parse origin/main)
 TOKEN="" # telegram token
@@ -77,7 +79,11 @@ if [ "$LOCAL" != "$REMOTE" ]; then
   # pull latest changes
   git pull
   # rebuild docker image
-  docker build -t mtt-engineer .
+  if ! docker build -t mtt-engineer .; then
+    # if it fails reset to the original commit
+    git reset --hard "$ORIGINAL_COMMIT"
+    exit 1
+  fi
   # stop running container and start with the latest image
   docker stop mtt-engineer
   docker rm mtt-engineer
@@ -108,5 +114,9 @@ sudo git config --global --add safe.directory /home/mattia/mtt.engineer
 If all goes well I get a nice confirmation with my Telegram bot.
 
 <img alt="telegram successful deployment message" src="/images/telegram_bot_success.png" />
+
+Future improvements:
+
+- make sure if the docker build fails that
 
 All the code is available on my GitHub https://github.com/mtt87/mtt.engineer
