@@ -27,7 +27,7 @@ h4 {
 }
 
 p {
-  @apply mb-3 text-gray-700 dark:text-white;
+  @apply mt-0 mb-3 text-gray-700 dark:text-white;
 }
 
 header a {

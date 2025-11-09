@@ -7,8 +7,8 @@ keywords:
   - static website
   - hosting
   - home lab
-createdAt: 2025-12-12
-updatedAt: 2025-12-12
+createdAt: 2025-10-12
+updatedAt: 2025-10-12
 ---
 
 ## Hosting my website on an RPi 5 at home

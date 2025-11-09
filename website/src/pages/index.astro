@@ -46,7 +46,7 @@ const posts = (await getCollection("posts")).sort(
 
   <hr />
 
-  <ul>
+  <ul class="flex flex-col gap-4">
     {
       posts.map((post) => (
         <li class="flex flex-col gap-1 no-underline">
