@@ -6,7 +6,7 @@
     "image": "https://avatars.githubusercontent.com/u/2150927",
     "location": { "countryCode": "UK", "city": "London" },
     "label": "Software Engineer",
-    "summary": "I'm a self-taught software engineer with 13+ years of experience. I've been building various products and tools over the years while working at different companies. I work best with Javascript/Typescript across the full stack while specialising in the frontend where I've been using React for years. I consider myself a beginner with Rust. In my spare time you can find me playing with Raspberry Pis, home automation and LoRa mesh networks.",
+    "summary": "I'm a self-taught software engineer with over 14 years of experience. I work best with TypeScript across the full stack while specializing in the frontend where I've been using React for years. I'm the type of engineer that thrives at the intersection of product and code. I genuinely enjoy talking to users, understanding their problems and shaping solutions that address real needs. In my spare time I'm always trying to find new ways to use my Raspberry Pis. I'm a big fan of home automation, monitoring bots and building a little cluster as home lab.",
     "profiles": [
       {
         "network": "GitHub",
@@ -28,14 +28,22 @@
     { "language": "Italian", "fluency": "Mother tongue" },
     { "language": "English", "fluency": "Full Professional" }
   ],
-  "meta": { "lastModified": "2025-01-29" },
+  "meta": { "lastModified": "2026-01-29" },
   "work": [
     {
       "name": "Apple",
       "startDate": "2022-05",
       "position": "Staff Software Engineer",
       "location": "London, UK",
-      "summary": "I'm part of Apple Services Engineering. My team is building and maintaining internal tools that help localize our apps and services. I've done extensive work to improve our monorepo of multiple web apps and shared components with state of the art tooling, greatly increasing speed, cost savings and DX across a distributed team."
+      "summary": "I'm part of Apple Services Engineering and my team is responsible for internal tools that help with the localization.",
+      "url": "https://apple.com",
+      "highlights": [
+        "Led extensive work to improve our monorepo of 9 web apps and shared components with state-of-the-art tooling to reduce CI pipeline times from 30 minutes to ~2 minutes.",
+        "Built an internal remote caching service in Rust, resulting in over 6,000 hours saved annually.",
+        "Active contributor to the internal frontend community. Authored shared libraries and best-practice guides used company-wide.",
+        "Organized high-profile networking events, including an internal EMEA frontend conference and an internal talk featuring the creator of Bun.",
+        "Early adopter and internal advocate for Bun and Playwright. My custom Playwright Docker image has surpassed 100k downloads internally."
+      ]
     },
     {
       "name": "tru.ID (IDlayr)",
@@ -44,11 +52,11 @@
       "url": "https://idlayr.com",
       "location": "London, UK",
       "position": "Technical Lead",
-      "summary": "tru.ID is an early-stage startup transforming authentication with SIM security. I was the owner of the frontend for the user-facing products which I've contributed both to the API and technical design. We used React with Next.js and took advantage of the Vercel serverless platform",
+      "summary": "tru.ID is an early-stage startup transforming authentication with SIM security. I was the owner of the frontend for the user-facing products. We used React with Next.js and leveraged the Vercel serverless platform",
       "highlights": [
         "Built the Developer Portal which included: public docs, code samples and a console dashboard.",
         "Extensive work on the authentication layer including OIDC integrations and e2e tests with Playwright.",
-        "Helped build the design system and a React components library, with a focus on a11y.",
+        "Led the development of the design system and React component library with a strict focus on a11y.",
         "Contributed to SDKs and a mobile app using React Native to demonstrate the capabilities of our platform."
       ]
     },
@@ -59,13 +67,7 @@
       "url": "https://www.11fs.com",
       "location": "London, UK",
       "position": "Senior Software Engineer",
-      "summary": "11:FS is a leading Fintech consultancy. I worked on Foundry, their modular, ledger-first set of components that lets you build digitally native propositions to scale at speed. I worked mainly on the frontend which included a web admin portal, a mobile app, and internal tools.",
-      "highlights": [
-        "Lead the GraphQL API design and authentication layer with Auth0, including the architecture of a mobile passwordless login.",
-        "Built the components library for our design system using CSS-in-JS.",
-        "Built various PoC to demonstrate different integration capabilities.",
-        "I was one of the engineers responsible to run demos to our existing and potential clients, including top-tier banks."
-      ]
+      "summary": "11:FS is a leading Fintech consultancy. I built their authentication layer with Auth0, including the architecture of a mobile passwordless login. I was one of the engineers responsible for running demos to our existing and potential clients, including top-tier banks."
     },
     {
       "name": "TES Global",
@@ -74,11 +76,7 @@
       "url": "https://www.tes.com",
       "location": "London, UK",
       "position": "Senior Software Engineer",
-      "summary": "At the time TES was one of the largest professional networks in the world with 8M+ teachers. The stack was based on 150+ node microservices and React on the frontend.",
-      "highlights": [
-        "Significant refactoring of a payment gateway, allowing a reduction in bugs producing duplicated/missing transactions and lost revenue in the busiest part of the website, the resources marketplace (~500k views per day)",
-        "Introduced GraphQL in our mobile app allowing a significant optimisation of the network usage and caching."
-      ]
+      "summary": "TES was one of the largest professional networks in the world with 8M+ teachers. I worked on a significant refactoring of a payment gateway, in the busiest part of the website, the resources marketplace (~500k views per day)."
     },
     {
       "name": "Hextech",
@@ -93,7 +91,7 @@
       "endDate": "2017-10",
       "location": "London, UK",
       "position": "Lead Developer",
-      "summary": "During my time TechHub was the leading co-working space in London. I've integrated our backend systems with different payment gateways and dealt with localisation after launching 5 international locations. I also built the internal CRM, website, and a mobile app for the members."
+      "summary": "During my time TechHub was the leading co-working space in London. I've integrated our backend systems with different payment gateways and dealt with localization after launching 5 international locations. I also built the internal CRM, website, and a mobile app for the members."
     }
   ],
   "projects": [

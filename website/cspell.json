@@ -1,7 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
-  "words": ["Mattia", "cloudflared"],
+  "words": [
+    "Mattia",
+    "cloudflared",
+    "EMEA",
+    "IDlayr",
+    "passwordless",
+    "Hextech",
+    "Vonage",
+    "Nexmo",
+    "Winerist",
+    "Digitale"
+  ],
   "ignorePaths": ["node_modules"],
   "import": ["@cspell/dict-en-gb/cspell-ext.json"],
   "language": "en-GB"

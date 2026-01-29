@@ -97,20 +97,27 @@ import { format } from "date-fns";
           resume.work.map((work) => (
             <div class="">
               <h3 class="mb-1 text-lg font-semibold">
-                <span>{work.position} -</span> <span>{work.name}</span>
+                <span>{work.position} -</span>{" "}
+                {work.url ? (
+                  <a href={work.url}>{work.name}</a>
+                ) : (
+                  <span>{work.name}</span>
+                )}
                 <span class="text-sm font-normal text-gray-500">
-                  {format(new Date(work.startDate), "MMM yyy")},
+                  {format(new Date(work.startDate), "MMM yyy")} -
                   {work.endDate !== undefined
                     ? format(new Date(work.endDate), "MMM yyy")
-                    : "current"}
+                    : "Present"}
                 </span>
               </h3>
               <p class="mb-2">{work.summary}</p>
-              <ul class="list-inside list-disc pl-8">
-                {work.highlights?.map((h) => (
-                  <li>{h}</li>
-                ))}
-              </ul>
+              {work.highlights !== undefined && work.highlights.length > 0 && (
+                <ul class="list-inside list-disc pl-8">
+                  {work.highlights?.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))
         }

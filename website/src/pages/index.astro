@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("posts")).sort(
-  (a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf()
+  (a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf(),
 );
 ---
 
@@ -16,9 +16,9 @@ const posts = (await getCollection("posts")).sort(
   <p>
     I've been building <strong>products</strong> and tools over the years while working
     at different companies but I very much enjoy doing it in my spare time as well.
-    I work best with <strong>Javascript/Typescript</strong> across the <strong
+    I work best with <strong>TypeScript</strong> across the <strong
       >full stack</strong
-    > but I specialise on the frontend where I've been using <strong
+    > but I specialize on the frontend where I've been using <strong
       >React</strong
     > for many years.
     <br />I started learning <strong>Rust</strong> in 2024 and while I've built a
@@ -31,7 +31,8 @@ const posts = (await getCollection("posts")).sort(
     > and building a little cluster as home lab.
   </p>
   <p>
-    I'm a videogamer, mostly switching between <strong>World of Warcraft</strong
+    I'm a Mac videogamer, mostly switching between <strong
+      >World of Warcraft</strong
     > and <strong>League of Legends</strong> but occasionally enjoying single player
     cozy games on my PlayStation 5.
   </p>
@@ -42,6 +43,10 @@ const posts = (await getCollection("posts")).sort(
       class="hover:underline"
       href="/cv.json">JSON</a
     >.
+  </p>
+
+  <p>
+    <small>Opinions expressed are my own and not those of my employer.</small>
   </p>
 
   <hr />
