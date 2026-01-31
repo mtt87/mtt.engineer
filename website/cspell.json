@@ -11,7 +11,10 @@
     "Vonage",
     "Nexmo",
     "Winerist",
-    "Digitale"
+    "Digitale",
+    "Jadx",
+    "Wireshark",
+    "agentic"
   ],
   "ignorePaths": ["node_modules"],
   "import": ["@cspell/dict-en-gb/cspell-ext.json"],

@@ -1,6 +1,6 @@
 ---
 title: Hosting my website on an RPi 5 at home
-description: Astro static website hosted on a RPi5 using Cloudflare Tunnel.
+description: Astro static website hosted on an RPi5 using Cloudflare Tunnel.
 keywords:
   - raspberry pi
   - astro
@@ -11,9 +11,15 @@ createdAt: 2025-10-12
 updatedAt: 2025-10-12
 ---
 
-## Hosting my website on an RPi 5 at home
+import { Image } from 'astro:assets';
+import websiteHostingRpi from '../../assets/website_hosting_rpi.png';
+import cloudflareDnsTunnel from '../../assets/cloudflare_dns_tunnel.png';
+import tunnelSetupCorrectly from '../../assets/tunnel_setup_correctly.png';
+import telegramBotSuccess from '../../assets/telegram_bot_success.png';
 
-<img alt="website hosting architecture" src="/images/website_hosting_rpi.png" />
+# Hosting my website on an RPi 5
+
+<Image loading="eager" alt="website hosting architecture" src={websiteHostingRpi} />
 
 ### Why such a complex setup to host a simple website? 😅
 
@@ -29,7 +35,7 @@ I bought the domain `mtt.engineer` on Cloudflare, which is also handling the nam
 
 This is how the DNS record should look if it’s correctly proxied to the tunnel.
 
-<img alt="cloudflare dns with tunnel" src="/images/cloudflare_dns_tunnel.png" />
+<Image alt="cloudflare dns with tunnel" src={cloudflareDnsTunnel} />
 
 ### RPi 5 setup
 
@@ -46,7 +52,7 @@ To set up the tunnel with `cloudflared`, I used the local managed tunnel mode by
 
 Once everything has been set up correctly, you can verify that the tunnel is up and running on your Cloudflare dashboard.
 
-<img alt="tunnel setup correctly" src="/images/tunnel_setup_correctly.png" />
+<Image alt="tunnel setup correctly" src={tunnelSetupCorrectly} />
 
 Cloudflare is also configured to leverage `stale-while-revalidate` and serve cached responses when the origin is down.
 
@@ -54,15 +60,15 @@ Cloudflare is also configured to leverage `stale-while-revalidate` and serve cac
 
 One of the requirements is to not expose the RPi to the public internet directly, so I can't have webhooks from GitHub reach the RPi when I push new code.
 
-I briefly explored the idea of using [Woodpecker CI](https://woodpecker-ci.org), but it defaults to requiring connectivity with GitHub and a `redirect_url` to perform OAuth authentication, plus it seemed really overkill.
+I briefly explored [Woodpecker CI](https://woodpecker-ci.org), but it requires a public `redirect_url` for OAuth authentication, which seemed overkill.
 
-For this reason I need to adopt a polling solution where I check every 5 minutes if there are new updates by comparing the local `main` and remote `origin/main` SHA1.
+So I went with a polling solution that checks every 5 minutes for new updates by comparing the local `main` and remote `origin/main` SHA1.
 
 If they don't match we trigger the build of the new image and deployment.
 
-Since the Cloudflare default cache TTL is 2 hours, I need to trigger a purge in order to immediately see the new changes.
+Since the Cloudflare default cache TTL is 2 hours, I need to purge the cache to see changes immediately.
 
-Once the operation is successful I sends me a message with a Telegram bot.
+Once the operation is successful, it sends me a message via a Telegram bot.
 
 ```bash
 #!/bin/bash
@@ -118,7 +124,7 @@ sudo crontab -e
 */5 * * * * /home/mattia/check-website-github.sh
 ```
 
-Additionally I found that I needed to run the following to make sure git accepts the fact that the owner of the repo directory is not the root user.
+I also needed to run this so Git accepts that the repo directory isn't owned by root.
 
 ```sh
 sudo git config --global --add safe.directory /home/mattia/mtt.engineer
@@ -126,6 +132,6 @@ sudo git config --global --add safe.directory /home/mattia/mtt.engineer
 
 If all goes well I get a nice confirmation with my Telegram bot.
 
-<img alt="telegram successful deployment message" src="/images/telegram_bot_success.png" />
+<Image alt="telegram successful deployment message" src={telegramBotSuccess} />
 
 All the code is available on my GitHub https://github.com/mtt87/mtt.engineer
