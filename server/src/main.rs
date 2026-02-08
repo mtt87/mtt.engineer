@@ -1,9 +1,26 @@
-use axum::{extract::OriginalUri, http::Request, Router};
+use axum::{
+    Router,
+    extract::{OriginalUri, Request},
+    http::{HeaderValue, header},
+    middleware::{self, Next},
+    response::Response,
+};
 use std::env;
 use tokio::net::TcpListener;
 use tower_http::{services::ServeDir, trace::TraceLayer};
 use tracing::info_span;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+
+async fn cache_control_middleware(request: Request, next: Next) -> Response {
+    let mut response = next.run(request).await;
+
+    response.headers_mut().insert(
+        header::CACHE_CONTROL,
+        HeaderValue::from_static("public, max-age=60, stale-while-revalidate=86400"),
+    );
+
+    response
+}
 
 #[tokio::main]
 async fn main() {
@@ -26,6 +43,7 @@ async fn main() {
 
     let app = Router::new()
         .fallback_service(ServeDir::new(root_dir))
+        .layer(middleware::from_fn(cache_control_middleware))
         .layer(
             TraceLayer::new_for_http().make_span_with(|request: &Request<_>| {
                 // Log the matched route's path (with placeholders not filled in).
