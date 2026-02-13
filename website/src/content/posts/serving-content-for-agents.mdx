@@ -20,12 +20,12 @@ My website already has all the content available as structured data:
 - blog posts are MDX files
 - my CV is a JSON file
 
-I was inspired by the Cloudflare Blog post ["Markdown for Agents"](https://blog.cloudflare.com/markdown-for-agents/). It requires a Pro, Business or Enterprise plan, so I decided to build it myself.
+I was inspired by the Cloudflare Blog post ["Markdown for Agents"](https://blog.cloudflare.com/markdown-for-agents/). Their solution requires a Pro, Business or Enterprise plan, so I decided to build it myself.
 
-I built this quickly with Claude Code and used this prompt with plan mode:
+I built this quickly with Claude Code. Here's the prompt I used in plan mode:
 
 ```
-I want to serve markdown when a request is made with `Accept: text/md` which most likely means that it's an agent not a human.
+I want to serve markdown when a request is made with `Accept: text/md` which most likely means that it's an agent, not a human.
 My website is built with Astro and the static files are served with a simple Rust server.
 Suggest a plan to make this happen.
 Consider that the content is already written in MDX (contains react components and images).
@@ -101,11 +101,6 @@ async fn content_negotiation_middleware(
         }
     }
 
-    response.headers_mut().insert(
-        header::VARY,
-        HeaderValue::from_static("Accept"),
-    );
-
     let mut response = next.run(request).await;
 
     if wants_markdown && response.status() != StatusCode::NOT_FOUND {
@@ -121,11 +116,46 @@ async fn content_negotiation_middleware(
 
 The logic is straightforward:
 
-1. If the `Accept` header contains `text/md` or `text/markdown`, rewrite the request path: `/` becomes `/index.md`, `/posts/foo` becomes `/posts/foo.md` etc
+1. If the `Accept` header contains `text/md` or `text/markdown`, rewrite the request path: `/` becomes `/index.md`, `/posts/foo` becomes `/posts/foo.md`, etc.
 2. Let `ServeDir` handle the file serving as usual
 3. If the `.md` file was found, set the `Content-Type` to `text/markdown`
 
 If a path doesn't have a markdown version, `ServeDir` returns a 404 and the middleware leaves it alone.
+
+### Cloudflare caching gotcha
+
+If you're behind Cloudflare (as I am, via Cloudflare Tunnel), content negotiation won't work out of the box. Cloudflare caches responses by URL and **ignores the `Vary: Accept` header** — so once the HTML version is cached, all requests get HTML regardless of the `Accept` header.
+
+I tried several approaches:
+
+- **`Vary: Accept` header** — Cloudflare ignores `Vary` for anything other than `Accept-Encoding`
+- **`Cache-Control: no-store` for markdown responses** — doesn't help because the cached HTML response is served before the request reaches the origin
+- **Cache Rules to bypass cache when `Accept` contains `text/markdown`** — didn't work either, the rule never matched
+
+What ultimately worked was a **Cloudflare Worker** that modifies the cache key based on the `Accept` header:
+
+```javascript
+export default {
+  async fetch(request) {
+    const accept = request.headers.get("Accept") || "";
+    const isMarkdown = accept.includes("text/markdown")
+      || accept.includes("text/md");
+    const cacheUrl = new URL(request.url);
+
+    if (isMarkdown) {
+      cacheUrl.searchParams.set("format", "md");
+    }
+
+    return fetch(request, {
+      cf: {
+        cacheKey: cacheUrl.toString(),
+      },
+    });
+  },
+};
+```
+
+The worker appends `?format=md` to the cache key (not to the actual request URL) when the `Accept` header asks for markdown. This makes Cloudflare store and serve separate cached versions for HTML and markdown requests.
 
 ### Testing it
 
