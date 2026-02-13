@@ -1,0 +1,143 @@
+---
+title: Serving markdown to AI agents with content negotiation
+description: "How I made my website serve clean markdown when AI agents request it via the Accept header."
+keywords:
+  - AI agents
+  - content negotiation
+  - markdown
+  - Rust
+  - Astro
+createdAt: 2026-02-13
+updatedAt: 2026-02-13
+---
+
+# Serving markdown to AI agents with content negotiation
+
+AI agents are browsing the web more and more. When an agent visits a page, it doesn't need the CSS, the SVGs, or the navigation bar — it just needs the content in a format it can parse easily.
+
+My website already has all the content available as structured data:
+
+- blog posts are MDX files
+- my CV is a JSON file
+
+I was inspired by the Cloudflare Blog post ["Markdown for Agents"](https://blog.cloudflare.com/markdown-for-agents/). It requires a Pro, Business or Enterprise plan, so I decided to build it myself.
+
+I built this quickly with Claude Code and used this prompt with plan mode:
+
+```
+I want to serve markdown when a request is made with `Accept: text/md` which most likely means that it's an agent not a human.
+My website is built with Astro and the static files are served with a simple Rust server.
+Suggest a plan to make this happen.
+Consider that the content is already written in MDX (contains react components and images).
+There is one page (the cv) that is rendered from JSON.
+```
+
+The idea is simple: if a client sends `Accept: text/markdown` in the request header, serve a `.md` version of the page instead of the HTML.
+
+### Generating markdown at build time
+
+Since I use [Astro](https://astro.build) with static output, I can create endpoints that generate `.md` files alongside the HTML pages during the build step.
+
+For blog posts, I created a static endpoint that mirrors the existing `[post].astro` pattern but outputs markdown instead of HTML.
+
+The tricky part is that the source files are MDX, which can contain JSX like `<Image />` components and `import` statements. These need to be stripped out to produce clean markdown.
+
+```typescript
+function cleanMdxBody(body: string): string {
+  return (
+    body
+      // Strip import lines
+      .replace(/^import\s+.*$/gm, "")
+      // Replace <Image alt="..." ... /> with [Image: alt text]
+      .replace(/<Image\s+[^>]*alt="([^"]*)"[^>]*\/>/g, "[Image: $1]")
+      // Remove any remaining JSX self-closing tags
+      .replace(/<[A-Z][a-zA-Z]*\s[^>]*\/>/g, "")
+      .trim()
+  );
+}
+```
+
+For the CV page, I import the same `resume.json` file used by the HTML version and convert it to structured markdown with sections for work experience, education, and languages.
+
+After building, I get clean `.md` files in the `dist/` folder:
+
+```
+dist/
+├── index.md
+├── cv.md
+└── posts/
+    ├── hosting-my-website-on-a-rpi.md
+    ├── serving-content-for-agents.md
+    └── ...
+```
+
+### Content negotiation in the Rust server
+
+The server is a simple Rust/Axum app that serves static files. I added a middleware that checks the `Accept` header before the file is served.
+
+```rust
+async fn content_negotiation_middleware(
+    mut request: Request, next: Next
+) -> Response {
+    let wants_markdown = request
+        .headers()
+        .get(header::ACCEPT)
+        .and_then(|v| v.to_str().ok())
+        .map(|v| v.contains("text/md") || v.contains("text/markdown"))
+        .unwrap_or(false);
+
+    if wants_markdown {
+        let path = request.uri().path();
+        let new_path = if path == "/" {
+            "/index.md".to_string()
+        } else if !path.contains('.') {
+            format!("{}.md", path.trim_end_matches('/'))
+        } else {
+            path.to_string()
+        };
+
+        if let Ok(uri) = new_path.parse::<Uri>() {
+            *request.uri_mut() = uri;
+        }
+    }
+
+    let mut response = next.run(request).await;
+
+    if wants_markdown && response.status() != StatusCode::NOT_FOUND {
+        response.headers_mut().insert(
+            header::CONTENT_TYPE,
+            HeaderValue::from_static("text/markdown; charset=utf-8"),
+        );
+    }
+
+    response
+}
+```
+
+The logic is straightforward:
+
+1. If the `Accept` header contains `text/md` or `text/markdown`, rewrite the request path: `/` becomes `/index.md`, `/posts/foo` becomes `/posts/foo.md` etc
+2. Let `ServeDir` handle the file serving as usual
+3. If the `.md` file was found, set the `Content-Type` to `text/markdown`
+
+If a path doesn't have a markdown version, `ServeDir` returns a 404 and the middleware leaves it alone.
+
+### Testing it
+
+You can test this with `curl`:
+
+```sh
+# Normal HTML (default behavior, unchanged)
+curl https://mtt.engineer/
+
+# Blog post as markdown
+curl -H "Accept: text/markdown" https://mtt.engineer/posts/hosting-my-website-on-a-rpi
+```
+
+The `.md` files are also directly accessible:
+
+```sh
+curl https://mtt.engineer/cv.md
+```
+
+That's it — a few lines of build-time code and a middleware layer, and my site now serves clean markdown to any agent that asks for it.

@@ -2,11 +2,11 @@
   "name": "mtt.engineer",
   "type": "module",
   "devDependencies": {
-    "@cspell/dict-en-gb": "^5.0.21",
+    "@cspell/dict-en-gb": "^5.0.23",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "4.1.18",
-    "@types/bun": "1.3.7",
-    "cspell": "^9.6.2",
+    "@types/bun": "1.3.9",
+    "cspell": "^9.6.4",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.7.2",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
-    "astro": "5.17.1",
+    "astro": "5.17.2",
     "date-fns": "4.1.0",
     "tailwindcss": "4.1.18"
   },
@@ -22,6 +22,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check-spell": "cspell src/content src/resume.json"
+    "check-spell": "cspell src/content src/resume.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   }
 }

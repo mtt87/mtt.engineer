@@ -11,15 +11,15 @@ createdAt: 2026-01-30
 updatedAt: 2026-01-30
 ---
 
-import { Image } from 'astro:assets';
-import alarmApp from '../../assets/alarm_app.png';
-import alarmApk from '../../assets/alarm_apk.png';
-import claudeNoTokens from '../../assets/claude_no_more_tokens.png';
-import haLovelaceCard from '../../assets/ha_lovelace_card.png';
+import { Image } from "astro:assets";
+import alarmApp from "../../assets/alarm_app.png";
+import alarmApk from "../../assets/alarm_apk.png";
+import claudeNoTokens from "../../assets/claude_no_more_tokens.png";
+import haLovelaceCard from "../../assets/ha_lovelace_card.png";
 
 ## Reverse engineer an alarm system proprietary protocol with Claude Code
 
-Every year I spend the Christmas holidays at my family house in Italy. We have an alarm system with a mobile app that looks like it was built in the late 90's.  
+Every year I spend the Christmas holidays at my family house in Italy. We have an alarm system with a mobile app that looks like it was built in the late 90's.
 
 <Image loading="eager" alt="alarm app" src={alarmApp} class="max-w-75" />
 
@@ -34,9 +34,10 @@ A few years ago I tried to set up a MITM proxy and capture packets with Wireshar
 
 This year I decided to try again with the help of [Claude Code](https://claude.com/product/claude-code), following a different approach.
 
-### Download the Android app .apk 
+### Download the Android app .apk
 
 I managed to download the Android app `.apk` and I used the utility [`jadx`](https://github.com/skylot/jadx) to decompile it.
+
 ```sh
 # install jadx if you don't have it yet
 brew install jadx
@@ -50,7 +51,11 @@ INFO  - done
 
 The end result is the Android app folder structure where you can find the source code.
 
-<Image alt="alarm apk decompiled" src={alarmApk} class="max-w-75 border border-gray-300" />
+<Image
+  alt="alarm apk decompiled"
+  src={alarmApk}
+  class="max-w-75 border border-gray-300"
+/>
 
 ### Ask Claude to understand the codebase and make a plan
 
@@ -60,6 +65,7 @@ Luckily this is something that LLMs are great for!
 
 I started Claude with a basic `/init` to help it understand the codebase.
 After that I gave Claude the full context of what I was specifically looking for and asked it to make a plan:
+
 - understand the proprietary protocol used to communicate with the alarm panel.
 - understand the usage of the commands to arm, disarm and check the status of a program.
 - produce a TypeScript CLI that I could use to invoke the commands
@@ -68,6 +74,7 @@ I gave some hints to Claude as well as I knew that a PIN and a passphrase were u
 I also scaffolded the project using [Bun](https://bun.com) and told Claude how I wanted the API to behave, for example using `bun run arm 1` to arm the first program.
 
 After some time I was surprised to see that Claude was able to understand the codebase quite well and made an execution plan in order to create all the required components.
+
 ```
 src/
 ├── client.ts           # High-level AlarmClient API (arm, disarm, status)
@@ -82,6 +89,7 @@ src/
 Claude got most of these details right, but some were wrong. I only caught them later when I tried running the commands.
 
 Once the code was produced I was very excited to try it!
+
 ```sh
 # check the armed/disarmed status of the program 1
 bun run status 1
@@ -101,6 +109,7 @@ Since I didn't want to wait for hours, I tried Gemini CLI which offers a free ti
 Surprisingly Gemini was able to find an issue with the type of AES encryption and I was able to move past the authentication point and make it work 🎉
 
 This is part of the extensive debug logging that was added in order to figure out for each step what was expected vs received.
+
 ```sh
 Authentication successful, UTN: 1
 Requesting status for zone 1...
@@ -131,6 +140,7 @@ Open: No
 
 With the CLI working I was able to take this to the next step and build an addon for Home Assistant.
 I asked Claude to scaffold the addon with a configuration that would accept some config variables from the user:
+
 ```yaml
 name: "Alarm"
 slug: "alarm"
@@ -159,13 +169,14 @@ ports:
 
 To expose the arm, disarm and check status functionalities, I decided to build a simple API with Bun that would call the same methods used in the CLI
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/programs/:id` | Get status of program/partition |
-| `POST` | `/programs/:id/arm` | Arm a program |
-| `POST` | `/programs/:id/disarm` | Disarm a program |
+| Method | Endpoint               | Description                     |
+| ------ | ---------------------- | ------------------------------- |
+| `GET`  | `/programs/:id`        | Get status of program/partition |
+| `POST` | `/programs/:id/arm`    | Arm a program                   |
+| `POST` | `/programs/:id/disarm` | Disarm a program                |
 
 Claude helped me create the `Dockerfile` necessary to build the addon (Home Assistant addons are basically Docker containers)
+
 ```Dockerfile
 FROM oven/bun:1-slim
 
@@ -179,6 +190,7 @@ CMD ["bun", "run", "start"]
 ```
 
 Once the addon was installed in Home Assistant I needed to create the required entities, starting from the REST commands that can be called from other buttons, scripts, automations.
+
 ```yaml
 rest_command:
   status_alarm_1:
@@ -193,6 +205,7 @@ rest_command:
 ```
 
 If you want to expose the current status you need to create sensors that can automatically check and update every minute
+
 ```yaml
 sensors:
   - platform: rest
@@ -203,6 +216,7 @@ sensors:
 ```
 
 I created a Lovelace card to show visually the current status for all the programs supported
+
 ```yaml
 type: entities
 entities:
@@ -211,10 +225,15 @@ entities:
   - sensor.alarm_program_3_status
 ```
 
-<Image alt="Home Assistant Lovelace card" src={haLovelaceCard} class="max-w-100" />
+<Image
+  alt="Home Assistant Lovelace card"
+  src={haLovelaceCard}
+  class="max-w-100"
+/>
 
 Finally I'm able to achieve the initial goal by including this part in the automation script that I trigger when I'm coming back home with the car.
 This automation is doing the following:
+
 - open the gate
 - open the garage door
 - turn on the lights (only after dark)
@@ -240,5 +259,5 @@ This automation is doing the following:
 
 I added a retry mechanism as the alarm panel is not 100% reliable.
 
-The power of LLMs and agentic coding tools allowed me to create something like this in a very short amount of time. 
+The power of LLMs and agentic coding tools allowed me to create something like this in a very short amount of time.
 What would have taken me days of debugging took just a few hours with AI assistance.

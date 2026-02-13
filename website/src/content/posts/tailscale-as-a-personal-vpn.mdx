@@ -8,12 +8,12 @@ createdAt: 2025-11-08
 updatedAt: 2025-11-08
 ---
 
-import { Image } from 'astro:assets';
-import tailscaleAddDevice from '../../assets/tailscale_add_device.png';
-import tailscaleExitNodeSetup from '../../assets/tailscale_exit_node_setup.png';
-import tailscaleExitNode from '../../assets/tailscale_exit_node.png';
-import tailscaleExitNodeEnabled from '../../assets/tailscale_exit_node_enabled.png';
-import tailscaleNameservers from '../../assets/tailscale_nameservers.png';
+import { Image } from "astro:assets";
+import tailscaleAddDevice from "../../assets/tailscale_add_device.png";
+import tailscaleExitNodeSetup from "../../assets/tailscale_exit_node_setup.png";
+import tailscaleExitNode from "../../assets/tailscale_exit_node.png";
+import tailscaleExitNodeEnabled from "../../assets/tailscale_exit_node_enabled.png";
+import tailscaleNameservers from "../../assets/tailscale_nameservers.png";
 
 # Tailscale as a personal VPN
 
@@ -29,7 +29,12 @@ Tailscale instead is a **personal VPN** that allows me to create a **secure** vi
 
 I use it both on traditional clients that have a GUI like an iPhone or Apple TV but also on headless servers like a Raspberry Pi running Linux.
 
-<Image loading="eager" class="border mx-auto block border-gray-300 max-w-100" alt="add device menu" src={tailscaleAddDevice} />
+<Image
+  loading="eager"
+  class="mx-auto block max-w-100 border border-gray-300"
+  alt="add device menu"
+  src={tailscaleAddDevice}
+/>
 
 ### Make it easy to connect to different devices
 
@@ -66,16 +71,28 @@ Exit nodes must be configured and enabled in the Tailscale dashboard.
 My most common use case is watching content and subscriptions from my home country when I'm abroad.
 All that's needed is a device that stays connected — a Raspberry Pi or even an Apple TV in standby works great.
 
-<Image class="border border-gray-300" alt="exit node device" src={tailscaleExitNode} />
+<Image
+  class="border border-gray-300"
+  alt="exit node device"
+  src={tailscaleExitNode}
+/>
 
 For convenience, **I disable key expiry on the devices I keep at home** and always connected, so I never need to re-authenticate the machine.
 
 Once the exit node is enabled it shows a badge and it becomes available to be used by other devices, for example this is a screenshot of my iPhone Tailscale iOS client:
 
-<Image class="border border-gray-300" alt="exit node device" src={tailscaleExitNodeEnabled} />
+<Image
+  class="border border-gray-300"
+  alt="exit node device"
+  src={tailscaleExitNodeEnabled}
+/>
 
 ### Centrally manage DNS
 
 I use NextDNS as a provider and Tailscale allows me to easily integrate with a custom Nameserver so I can force DNS resolution on all my devices no matter what network I'm connected to.
 
-<Image class="border border-gray-300" alt="exit node device" src={tailscaleNameservers} />
+<Image
+  class="border border-gray-300"
+  alt="exit node device"
+  src={tailscaleNameservers}
+/>
