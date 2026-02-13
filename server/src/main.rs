@@ -11,17 +11,6 @@ use tower_http::{services::ServeDir, trace::TraceLayer};
 use tracing::info_span;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-async fn cache_control_middleware(request: Request, next: Next) -> Response {
-    let mut response = next.run(request).await;
-
-    response.headers_mut().insert(
-        header::CACHE_CONTROL,
-        HeaderValue::from_static("public, max-age=60, stale-while-revalidate=86400"),
-    );
-
-    response
-}
-
 async fn content_negotiation_middleware(mut request: Request, next: Next) -> Response {
     let wants_markdown = request
         .headers()
@@ -47,15 +36,21 @@ async fn content_negotiation_middleware(mut request: Request, next: Next) -> Res
 
     let mut response = next.run(request).await;
 
-    response.headers_mut().insert(
-        header::VARY,
-        HeaderValue::from_static("Accept"),
-    );
-
     if wants_markdown && response.status() != StatusCode::NOT_FOUND {
         response.headers_mut().insert(
             header::CONTENT_TYPE,
             HeaderValue::from_static("text/markdown; charset=utf-8"),
+        );
+        // Don't cache markdown responses — Cloudflare ignores Vary on Accept
+        // and would serve the cached markdown to regular browser requests.
+        response.headers_mut().insert(
+            header::CACHE_CONTROL,
+            HeaderValue::from_static("no-store"),
+        );
+    } else {
+        response.headers_mut().insert(
+            header::CACHE_CONTROL,
+            HeaderValue::from_static("public, max-age=60, stale-while-revalidate=86400"),
         );
     }
 
@@ -84,7 +79,6 @@ async fn main() {
     let app = Router::new()
         .fallback_service(ServeDir::new(root_dir))
         .layer(middleware::from_fn(content_negotiation_middleware))
-        .layer(middleware::from_fn(cache_control_middleware))
         .layer(
             TraceLayer::new_for_http().make_span_with(|request: &Request<_>| {
                 // Log the matched route's path (with placeholders not filled in).
