@@ -103,7 +103,7 @@ async fn content_negotiation_middleware(
 
     let mut response = next.run(request).await;
 
-    if wants_markdown && response.status() != StatusCode::NOT_FOUND {
+    if wants_markdown && response.status() == StatusCode::OK {
         response.headers_mut().insert(
             header::CONTENT_TYPE,
             HeaderValue::from_static("text/markdown; charset=utf-8"),
@@ -124,7 +124,7 @@ If a path doesn't have a markdown version, `ServeDir` returns a 404 and the midd
 
 ### Cloudflare caching gotcha
 
-If you're behind Cloudflare (as I am, via Cloudflare Tunnel), content negotiation won't work out of the box. Cloudflare caches responses by URL and **ignores the `Vary: Accept` header** — so once the HTML version is cached, all requests get HTML regardless of the `Accept` header.
+If you're behind Cloudflare it caches responses by URL and **ignores the `Vary: Accept` header** — so once the HTML version is cached, all requests get HTML regardless of the `Accept` header.
 
 I tried several approaches:
 

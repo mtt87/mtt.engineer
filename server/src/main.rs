@@ -36,7 +36,7 @@ async fn content_negotiation_middleware(mut request: Request, next: Next) -> Res
 
     let mut response = next.run(request).await;
 
-    if wants_markdown && response.status() != StatusCode::NOT_FOUND {
+    if wants_markdown && response.status() == StatusCode::OK {
         response.headers_mut().insert(
             header::CONTENT_TYPE,
             HeaderValue::from_static("text/markdown; charset=utf-8"),
