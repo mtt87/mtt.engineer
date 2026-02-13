@@ -13,34 +13,20 @@ updatedAt: 2026-02-13
 
 # Serving markdown to AI agents with content negotiation
 
-AI agents are browsing the web more and more. When an agent visits a page, it doesn't need the CSS, the SVGs, or the navigation bar — it just needs the content in a format it can parse easily.
+I decided to make my site more AI-friendly. I was inspired by the Cloudflare Blog post ["Markdown for Agents"](https://blog.cloudflare.com/markdown-for-agents/). Their solution requires a Pro, Business or Enterprise plan, so I decided to build it myself (for free).
 
-My website already has all the content available as structured data:
+The idea is simple: if a client sends Accept: text/markdown in the request header, serve a .md version of the page instead of HTML. When an agent visits a page, it doesn't need the CSS, SVGs, or navigation bar—it just needs the content in a format it can parse easily.
 
-- blog posts are MDX files
-- my CV is a JSON file
-
-I was inspired by the Cloudflare Blog post ["Markdown for Agents"](https://blog.cloudflare.com/markdown-for-agents/). Their solution requires a Pro, Business or Enterprise plan, so I decided to build it myself.
-
-I built this quickly with Claude Code. Here's the prompt I used in plan mode:
-
-```
-I want to serve markdown when a request is made with `Accept: text/md` which most likely means that it's an agent, not a human.
-My website is built with Astro and the static files are served with a simple Rust server.
-Suggest a plan to make this happen.
-Consider that the content is already written in MDX (contains react components and images).
-There is one page (the cv) that is rendered from JSON.
-```
-
-The idea is simple: if a client sends `Accept: text/markdown` in the request header, serve a `.md` version of the page instead of the HTML.
+My current setup:
+- Astro static site
+- Blog posts as MDX files
+- CV as a JSON file
 
 ### Generating markdown at build time
 
-Since I use [Astro](https://astro.build) with static output, I can create endpoints that generate `.md` files alongside the HTML pages during the build step.
+For blog posts, I created an endpoint that mirrors the existing [post].astro pattern but outputs markdown instead of HTML. You can do this in [Astro](https://astro.build), and it's available in other static site generators as well.
 
-For blog posts, I created a static endpoint that mirrors the existing `[post].astro` pattern but outputs markdown instead of HTML.
-
-The tricky part is that the source files are MDX, which can contain JSX like `<Image />` components and `import` statements. These need to be stripped out to produce clean markdown.
+The tricky part is that the source files are MDX, which can contain JSX like `<Image />` components and `import` statements. These need to be stripped out to produce clean markdown. I created a function for that:
 
 ```typescript
 function cleanMdxBody(body: string): string {
