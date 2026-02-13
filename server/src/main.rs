@@ -47,6 +47,11 @@ async fn content_negotiation_middleware(mut request: Request, next: Next) -> Res
 
     let mut response = next.run(request).await;
 
+    response.headers_mut().insert(
+        header::VARY,
+        HeaderValue::from_static("Accept"),
+    );
+
     if wants_markdown && response.status() != StatusCode::NOT_FOUND {
         response.headers_mut().insert(
             header::CONTENT_TYPE,

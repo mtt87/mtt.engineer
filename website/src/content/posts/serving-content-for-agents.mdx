@@ -101,6 +101,11 @@ async fn content_negotiation_middleware(
         }
     }
 
+    response.headers_mut().insert(
+        header::VARY,
+        HeaderValue::from_static("Accept"),
+    );
+
     let mut response = next.run(request).await;
 
     if wants_markdown && response.status() != StatusCode::NOT_FOUND {
