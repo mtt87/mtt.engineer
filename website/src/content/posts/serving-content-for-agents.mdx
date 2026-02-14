@@ -7,6 +7,7 @@ keywords:
   - markdown
   - Rust
   - Astro
+  - Cloudflare caching
 createdAt: 2026-02-13
 updatedAt: 2026-02-13
 ---
@@ -17,8 +18,7 @@ I decided to make my site more AI-friendly. I was inspired by the Cloudflare Blo
 
 The idea is simple: if a client sends Accept: text/markdown in the request header, serve a .md version of the page instead of HTML. When an agent visits a page, it doesn't need the CSS, SVGs, or navigation bar—it just needs the content in a format it can parse easily.
 
-My current setup:
-- Astro static site
+My current setup is an Astro static site with:
 - Blog posts as MDX files
 - CV as a JSON file
 
