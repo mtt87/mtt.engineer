@@ -19,7 +19,7 @@ export async function generateOgImage(
   const svg = await satori(
     {
       type: "div",
-      key: 'container',
+      key: "container",
       props: {
         style: {
           display: "flex",
@@ -33,7 +33,7 @@ export async function generateOgImage(
         children: [
           {
             type: "div",
-            key: 'avatar',
+            key: "avatar",
             props: {
               style: { display: "flex", alignItems: "center", gap: "16px" },
               children: [
@@ -58,7 +58,7 @@ export async function generateOgImage(
           },
           {
             type: "div",
-            key: 'content',
+            key: "content",
             props: {
               style: {
                 display: "flex",
