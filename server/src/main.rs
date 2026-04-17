@@ -11,6 +11,10 @@ use tower_http::{services::ServeDir, trace::TraceLayer};
 use tracing::info_span;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+fn is_homepage(path: &str) -> bool {
+    matches!(path, "/" | "/index.html")
+}
+
 async fn content_negotiation_middleware(mut request: Request, next: Next) -> Response {
     let wants_markdown = request
         .headers()
@@ -18,6 +22,8 @@ async fn content_negotiation_middleware(mut request: Request, next: Next) -> Res
         .and_then(|v| v.to_str().ok())
         .map(|v| v.contains("text/md") || v.contains("text/markdown"))
         .unwrap_or(false);
+
+    let original_path = request.uri().path().to_string();
 
     if wants_markdown {
         let path = request.uri().path();
@@ -35,6 +41,16 @@ async fn content_negotiation_middleware(mut request: Request, next: Next) -> Res
     }
 
     let mut response = next.run(request).await;
+
+    if is_homepage(&original_path) && response.status() == StatusCode::OK {
+        response.headers_mut().insert(
+            header::LINK,
+            HeaderValue::from_static(
+                "</index.md>; rel=\"alternate\"; type=\"text/markdown\", \
+                 </cv.json>; rel=\"describedby\"",
+            ),
+        );
+    }
 
     if wants_markdown && response.status() == StatusCode::OK {
         response.headers_mut().insert(
