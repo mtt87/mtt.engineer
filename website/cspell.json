@@ -15,7 +15,8 @@
     "Jadx",
     "Wireshark",
     "agentic",
-    "Axum"
+    "Axum",
+    "tiramisù"
   ],
   "ignorePaths": ["node_modules"],
   "import": ["@cspell/dict-en-gb/cspell-ext.json"],
