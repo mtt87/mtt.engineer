@@ -6,7 +6,7 @@
     "image": "https://avatars.githubusercontent.com/u/2150927",
     "location": { "countryCode": "UK", "city": "London" },
     "label": "Software Engineer",
-    "summary": "I'm a self-taught software engineer with over 14 years of experience. I work best with TypeScript across the full stack while specializing in the frontend where I've been using React for years. I'm the type of engineer that thrives at the intersection of product and code. I genuinely enjoy talking to users, understanding their problems and shaping solutions that address real needs. In my spare time I'm always trying to find new ways to use my Raspberry Pis. I'm a big fan of home automation, monitoring bots and building a little cluster as home lab.",
+    "summary": "I'm a self-taught software engineer with over 14 years of experience currently based in London, UK. I work best with TypeScript across the full stack while specializing in the frontend, where I've been using React for years. These days, a lot of my work is AI-assisted, and I've used Claude Code heavily over the past year. I'm the type of engineer who thrives at the intersection of product and code; I genuinely enjoy talking to users, understanding their problems, and shaping solutions that address real needs. I'm a big fan of home automation and love finding new ways to use my collection of Raspberry Pis.",
     "profiles": [
       {
         "network": "GitHub",
@@ -25,8 +25,8 @@
     }
   ],
   "languages": [
-    { "language": "Italian", "fluency": "Mother tongue" },
-    { "language": "English", "fluency": "Full Professional" }
+    { "language": "Italian", "fluency": "Native speaker" },
+    { "language": "English", "fluency": "Full Professional Proficiency" }
   ],
   "meta": { "lastModified": "2026-01-29" },
   "work": [
@@ -35,14 +35,15 @@
       "startDate": "2022-05",
       "position": "Staff Software Engineer",
       "location": "London, UK",
-      "summary": "I'm part of Apple Services Engineering and my team is responsible for internal tools that help with the localization.",
+      "summary": "I'm part of Apple Services Engineering where I work on internal tooling allowing us to scale our localization across 175 countries and over 50 languages.",
       "url": "https://apple.com",
       "highlights": [
-        "Led extensive work to improve our monorepo of 9 web apps and shared components with state-of-the-art tooling to reduce CI pipeline times from 30 minutes to ~2 minutes.",
-        "Built an internal remote caching service in Rust, resulting in over 6,000 hours saved annually.",
-        "Active contributor to the internal frontend community. Authored shared libraries and best-practice guides used company-wide.",
-        "Organized high-profile networking events, including an internal EMEA frontend conference and an internal talk featuring the creator of Bun.",
-        "Early adopter and internal advocate for Bun and Playwright. My custom Playwright Docker image has surpassed 100k downloads internally."
+        "Productionized a novel agentic workflow for editorial content generation, replacing an opaque AI \"black box\" with a polished UI that lets internal users see and steer the agent at every step.",
+        "Built an internal remote caching service written in Rust that is used by multiple teams, resulting in over 6,000 hours saved in the first year.",
+        "Led extensive work to optimize a monorepo of 9 web apps and shared components with state-of-the-art tooling, reducing CI pipeline times from 30 minutes down to ~3 minutes.",
+        "Lead AI adoption within my organization, establishing best practices for effective use, driving internal discussions on AI workflows, and presenting findings at engineering forums.",
+        "Actively contribute to the internal frontend community by authoring shared libraries and best-practice guides used company-wide. My internal Playwright Docker image has surpassed 100k downloads.",
+        "Partner with directors of engineering on internal community initiatives, organizing high-profile events including an EMEA frontend conference and an internal talk featuring the creator of Bun."
       ]
     },
     {
@@ -56,8 +57,7 @@
       "highlights": [
         "Built the Developer Portal which included: public docs, code samples and a console dashboard.",
         "Extensive work on the authentication layer including OIDC integrations and e2e tests with Playwright.",
-        "Led the development of the design system and React component library with a strict focus on a11y.",
-        "Contributed to SDKs and a mobile app using React Native to demonstrate the capabilities of our platform."
+        "Led the development of the design system and React component library with a strict focus on a11y."
       ]
     },
     {
@@ -76,14 +76,14 @@
       "url": "https://www.tes.com",
       "location": "London, UK",
       "position": "Senior Software Engineer",
-      "summary": "TES was one of the largest professional networks in the world with 8M+ teachers. I worked on a significant refactoring of a payment gateway, in the busiest part of the website, the resources marketplace (~500k views per day)."
+      "summary": "TES was one of the largest professional networks in the world with 8M+ teachers. I worked on a significant refactoring of a payment gateway used in the resources marketplace, the highest-traffic part of the website with ~500k daily views."
     },
     {
       "name": "Hextech",
       "startDate": "2017-01",
       "endDate": "2021-01",
       "position": "Co-founder",
-      "summary": "It started as a side project with friends working in our spare time during evenings but over the years we built 2 mobile apps, an e-commerce, and tried to launch a new startup to help kids learn about financial education. Learned a lot from our failures."
+      "summary": "Started as a side project with friends working in our spare time during evenings. Over the years we built 2 mobile apps, an e-commerce, and tried to launch a new startup to help kids learn about financial education. Learned a lot from our failures."
     },
     {
       "name": "TechHub",
@@ -91,7 +91,7 @@
       "endDate": "2017-10",
       "location": "London, UK",
       "position": "Lead Developer",
-      "summary": "During my time TechHub was the leading co-working space in London. I've integrated our backend systems with different payment gateways and dealt with localization after launching 5 international locations. I also built the internal CRM, website, and a mobile app for the members."
+      "summary": "TechHub was the leading co-working space in London. I've integrated our backend systems with different payment gateways and dealt with localization after launching 5 international locations. I also built the internal CRM, website, and a mobile app for the members."
     }
   ],
   "projects": [

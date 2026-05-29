@@ -17,7 +17,7 @@ import videoProcessorUi from "../../assets/video_processor_ui.png";
 
 I recently started a [YouTube channel](https://www.youtube.com/@Tony_Biscotti) where I review ice cream and tiramisù in different places I visit around the world.
 From the start, I wanted to automate all the boring editing — partly because I'm not used to it and learning proper editing tools would take me significantly longer.
-As a software developer, with the help of Claude this was easier for me to implement with code.
+As a software developer, with Claude's help this was easier to just build myself.
 
 ## Audio processing
 
@@ -32,13 +32,13 @@ This is the final script I produced:
 uv run process_video.py input.mov -s 0.8 --bleep-word shit
 ```
 
-The parameter `-s 0.8` determines the intensity of denoising and the parameters `--bleep-word` determine what words to automatically bleep.
+The parameter `-s 0.8` determines the intensity of denoising and the parameter `--bleep-word` determines what words to automatically bleep.
 
 ### Noise attenuation and voice enhancement
 
 I looked for a local ML model that could leverage MLX in order to take advantage of Apple Silicon, so this part has been done with a Python script.
 `mlx-audio` is a suite of audio processing tools that can take care of all of this while performing well thanks to hardware acceleration.
-I always rely on `uv` as python package manager and virtual environment manager.
+I always rely on `uv` as a Python package manager and virtual environment manager.
 
 Here is the full function that performs the following pipeline:
 
@@ -74,7 +74,7 @@ def denoise_audio(
 
 ### Automatic bleep of swear words
 
-To find the words to bleep I'm running Whisper, which is a speech-to-text model that is able to transcribe the audio of the video with the timestamps.
+To find the words to bleep I'm running Whisper, which transcribes the audio with word-level timestamps.
 
 ```python
 def _find_word_segments(
@@ -111,7 +111,7 @@ def _find_word_segments(
 
 ## Video processing
 
-On the video side I wanted to add an overlay to show
+On the video side, I wanted to add an overlay to show
 
 - the rating, from 1 to 5, with steps of 0.5
 - map icon pin
@@ -126,7 +126,7 @@ I created a simple UI to facilitate the process rather than calling the CLI manu
 
 <Image class="max-w-full" alt="video overlay example" src={videoProcessorUi} />
 
-Behind the scenes I use `node canvas` to render the various elements of the overlay and `ffmpeg` to mux the canvas together with the video, frame by frame.
+Behind the scenes, I use `canvas` (node-canvas) to render the various elements of the overlay and `ffmpeg` to mux the canvas together with the video, frame by frame.
 
 ```ts
 import { createCanvas, loadImage } from "canvas";

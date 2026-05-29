@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 Personal website and blog at **mtt.engineer** - a full-stack static site with:
+
 - **Frontend**: Astro 5 + TypeScript + Tailwind CSS 4
 - **Backend**: Rust server (Axum) serving static files
 - **Deployment**: Docker → Raspberry Pi 5 → Cloudflare Tunnel
@@ -17,7 +18,6 @@ Personal website and blog at **mtt.engineer** - a full-stack static site with:
 bun install          # Install dependencies
 bun dev              # Dev server (localhost:4321)
 bun run build        # Production build → dist/
-npm run check-spell  # Spell check content
 ```
 
 ### Server (in `/server`)
