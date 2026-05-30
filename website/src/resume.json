@@ -6,7 +6,7 @@
     "image": "https://avatars.githubusercontent.com/u/2150927",
     "location": { "countryCode": "UK", "city": "London" },
     "label": "Software Engineer",
-    "summary": "I'm a self-taught software engineer with over 14 years of experience currently based in London, UK. I work best with TypeScript across the full stack while specializing in the frontend, where I've been using React for years. These days, a lot of my work is AI-assisted, and I've used Claude Code heavily over the past year. I'm the type of engineer who thrives at the intersection of product and code; I genuinely enjoy talking to users, understanding their problems, and shaping solutions that address real needs. I'm a big fan of home automation and love finding new ways to use my collection of Raspberry Pis.",
+    "summary": "I'm a software engineer with over 14 years of experience, currently based in London, UK. I work best with TypeScript across the full stack while specializing in the frontend, where I've been using React for years. These days, a lot of my work is AI-assisted, and I've used Claude Code heavily over the past year. I'm the type of engineer who thrives at the intersection of product and code; I genuinely enjoy talking to users, understanding their problems, and shaping solutions that address real needs. I'm a big fan of home automation and love finding new ways to use my collection of Raspberry Pis.",
     "profiles": [
       {
         "network": "GitHub",
@@ -38,12 +38,12 @@
       "summary": "I'm part of Apple Services Engineering where I work on internal tooling allowing us to scale our localization across 175 countries and over 50 languages.",
       "url": "https://apple.com",
       "highlights": [
-        "Productionized a novel agentic workflow for editorial content generation, replacing an opaque AI \"black box\" with a polished UI that lets internal users see and steer the agent at every step.",
-        "Built an internal remote caching service written in Rust that is used by multiple teams, resulting in over 6,000 hours saved in the first year.",
-        "Led extensive work to optimize a monorepo of 9 web apps and shared components with state-of-the-art tooling, reducing CI pipeline times from 30 minutes down to ~3 minutes.",
-        "Lead AI adoption within my organization, establishing best practices for effective use, driving internal discussions on AI workflows, and presenting findings at engineering forums.",
-        "Actively contribute to the internal frontend community by authoring shared libraries and best-practice guides used company-wide. My internal Playwright Docker image has surpassed 100k downloads.",
-        "Partner with directors of engineering on internal community initiatives, organizing high-profile events including an EMEA frontend conference and an internal talk featuring the creator of Bun."
+        "Shipped an agentic editorial-content workflow, replacing an opaque AI black box with a UI that lets users see and steer the agent at every step.",
+        "Built a remote caching service in Rust used by 20+ teams. Saved 6k hours/year in compute and engineering costs.",
+        "Cut the time to ship a new analytics feature from 3 months to 2 weeks by applying AI across the whole workflow: design and process, not just code.",
+        "Optimized a 9-app monorepo with state-of-the-art tooling, cutting CI from 30 minutes to ~3.",
+        "Organized high-profile community events with engineering directors, including an EMEA frontend conference and a talk with the creator of Bun.",
+        "Authored company-wide shared libraries and best-practice guides; my internal Playwright Docker image has 100k+ downloads."
       ]
     },
     {
@@ -53,12 +53,7 @@
       "url": "https://idlayr.com",
       "location": "London, UK",
       "position": "Technical Lead",
-      "summary": "tru.ID is an early-stage startup transforming authentication with SIM security. I was the owner of the frontend for the user-facing products. We used React with Next.js and leveraged the Vercel serverless platform",
-      "highlights": [
-        "Built the Developer Portal which included: public docs, code samples and a console dashboard.",
-        "Extensive work on the authentication layer including OIDC integrations and e2e tests with Playwright.",
-        "Led the development of the design system and React component library with a strict focus on a11y."
-      ]
+      "summary": "IDlayr was a startup transforming authentication with SIM security. I was the technical lead for the Developer Portal which included: public docs, code samples and a console dashboard. I've done extensive work on the OIDC authentication layer."
     },
     {
       "name": "11:FS",
@@ -67,7 +62,7 @@
       "url": "https://www.11fs.com",
       "location": "London, UK",
       "position": "Senior Software Engineer",
-      "summary": "11:FS is a leading Fintech consultancy. I built their authentication layer with Auth0, including the architecture of a mobile passwordless login. I was one of the engineers responsible for running demos to our existing and potential clients, including top-tier banks."
+      "summary": "11:FS was a leading fintech consultancy. I built their authentication layer with Auth0, including the architecture of a mobile passwordless login. I was one of the engineers responsible for running demos to our existing and potential clients, including top-tier banks."
     },
     {
       "name": "TES Global",
@@ -83,7 +78,7 @@
       "startDate": "2017-01",
       "endDate": "2021-01",
       "position": "Co-founder",
-      "summary": "Started as a side project with friends working in our spare time during evenings. Over the years we built 2 mobile apps, an e-commerce, and tried to launch a new startup to help kids learn about financial education. Learned a lot from our failures."
+      "summary": "Started as a side project with friends working in our spare time during evenings. Built two mobile apps and attempted a fintech-education startup for kids. Learned a lot from the failures."
     },
     {
       "name": "TechHub",
