@@ -7,11 +7,17 @@
     "location": { "countryCode": "UK", "city": "London" },
     "label": "Software Engineer",
     "summary": "I'm a software engineer with over 14 years of experience, currently based in London, UK. I work best with TypeScript across the full stack while specializing in the frontend, where I've been using React for years. These days, a lot of my work is AI-assisted, and I've used Claude Code heavily over the past year. I'm the type of engineer who thrives at the intersection of product and code; I genuinely enjoy talking to users, understanding their problems, and shaping solutions that address real needs. I'm a big fan of home automation and love finding new ways to use my collection of Raspberry Pis.",
+    "url": "https://mtt.engineer",
     "profiles": [
       {
         "network": "GitHub",
         "url": "https://github.com/mtt87",
         "username": "mtt87"
+      },
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/mattiaasti/",
+        "username": "mattiaasti"
       }
     ]
   },
