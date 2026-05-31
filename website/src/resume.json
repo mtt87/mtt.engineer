@@ -45,11 +45,13 @@
       "url": "https://apple.com",
       "highlights": [
         "Replaced an opaque AI black box with an agentic editorial workflow users can see and steer at every step.",
-        "Built a remote caching service in Rust used by 20+ teams. Saved 6k hours/year in compute and engineering costs.",
+        "Built a remote caching service in Rust used by 20+ teams. Saved 6k hours/year in compute and engineering.",
         "Cut analytics feature delivery from 3 months to 2 weeks by applying AI across the whole workflow: design and process, not just code.",
         "Cut CI from 30 minutes to ~3 across a 9-app monorepo with state-of-the-art tooling.",
         "Organized high-profile community events with engineering directors, including an EMEA frontend conference and a talk with the creator of Bun.",
-        "Authored company-wide shared libraries and best-practice guides; my internal Playwright Docker image has 100k+ downloads."
+        "Act as a technical multiplier across the org: my internal React guides are the go-to standard and engineers of all seniority levels rely on my reviews and advice.",
+        "Authored company-wide shared libraries; my internal Playwright Docker image has 100k+ downloads.",
+        "Pioneered identity attestation and mTLS-based internal auth; my guide and example repo became the go-to reference for frontend engineers."
       ]
     },
     {

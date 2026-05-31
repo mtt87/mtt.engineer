@@ -21,7 +21,7 @@ import resume from "../src/resume.json";
 // ---------------------------------------------------------------------------
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 28,
+    paddingTop: 48,
     paddingBottom: 36,
     paddingHorizontal: 40,
     fontSize: 10,
