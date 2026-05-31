@@ -44,10 +44,10 @@
       "summary": "I'm part of Apple Services Engineering where I work on internal tooling allowing us to scale our localization across 175 countries and over 50 languages.",
       "url": "https://apple.com",
       "highlights": [
-        "Shipped an agentic editorial-content workflow, replacing an opaque AI black box with a UI that lets users see and steer the agent at every step.",
+        "Replaced an opaque AI black box with an agentic editorial workflow users can see and steer at every step.",
         "Built a remote caching service in Rust used by 20+ teams. Saved 6k hours/year in compute and engineering costs.",
-        "Cut the time to ship a new analytics feature from 3 months to 2 weeks by applying AI across the whole workflow: design and process, not just code.",
-        "Optimized a 9-app monorepo with state-of-the-art tooling, cutting CI from 30 minutes to ~3.",
+        "Cut analytics feature delivery from 3 months to 2 weeks by applying AI across the whole workflow: design and process, not just code.",
+        "Cut CI from 30 minutes to ~3 across a 9-app monorepo with state-of-the-art tooling.",
         "Organized high-profile community events with engineering directors, including an EMEA frontend conference and a talk with the creator of Bun.",
         "Authored company-wide shared libraries and best-practice guides; my internal Playwright Docker image has 100k+ downloads."
       ]
